@@ -1,3 +1,9 @@
 .mainPage{
     flex: 4;
 }
+.data{
+    color: #31708f;
+}
+.error{
+    color: red;
+}

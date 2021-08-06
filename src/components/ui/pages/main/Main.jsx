@@ -13,12 +13,8 @@ function Weather({ zipCode }){
       .then(res => res.json())
       .then(
         (result) => {
-            console.log(result);
-            console.log(weather);
-    
             setIsLoaded(true);
             setWeather(result);
-    
             },
         (error) => { 
             setIsLoaded(true);
@@ -34,11 +30,20 @@ function Weather({ zipCode }){
     return <div>Loading...</div>;
   } else {
     return (
+      <>
         <ul>
             <li>
-              {weather.City} {weather.Temperature} {weather.TimeZone}
+              <span className="data">City: {weather.City}</span>
+            </li>
+            <li>
+              <span className="data">Temperature: {weather.Temperature > 0 ? '+' : '-'}{weather.Temperature}&#176;</span>
+            </li>
+            <li>
+              <span className="data">Time zone: {weather.TimeZone}</span>
             </li>
         </ul>
+        <span className="error">{weather.ErrorMessage ? 'Error: ' + weather.ErrorMessage : ''}</span>
+      </>
       );
   }
 }
@@ -46,6 +51,11 @@ function Weather({ zipCode }){
 export default function Main() {
     const [zipCode, setZipCode] = useState();
     const [isSubmitted, setIsSubmitted] = useState();
+
+    function handleChange(e) {
+      setZipCode(e.target.value);
+      setIsSubmitted(false);
+    }
 
     return (
         <div className="mainPage">
@@ -57,11 +67,11 @@ export default function Main() {
                 }} >
                 
                 <Form.Group>
-                    <Form.Control placeholder='Enter your zip code:' onChange={e => setZipCode(e.target.value)} style={{width:'221px'}}/>
+                    <Form.Control placeholder='Enter your zip code:' onChange={e => handleChange(e)} style={{width:'221px'}}/>
                 </Form.Group>
                 <Button variant='success' type='submit' disabled={!zipCode}><WbSunnyTwoToneIcon />Get current weather by zip code</Button>
             </Form>
-            {isSubmitted ? <Weather zipCode={zipCode}  /> : ''}
+            {isSubmitted && zipCode ? <Weather zipCode={zipCode}  /> : ''}
         </div>
     )
 }
