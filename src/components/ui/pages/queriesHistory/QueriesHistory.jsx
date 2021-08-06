@@ -1,8 +1,10 @@
 import './queriesHistory.css'
 import { useState, useEffect  } from 'react';
+import { Card,CardTitle,CardBody,CardSubtitle,CardText } from 'reactstrap';
+
 
 function GetQueries(){
-    const [queries, setQueries] = useState();
+    const [queries, setQueries] = useState([]);
     const [error, setError] = useState(null);
     const [isLoaded, setIsLoaded] = useState(false);
 
@@ -14,29 +16,53 @@ function GetQueries(){
             setIsLoaded(true);
             console.log(result);
             setQueries(result);
-            },
+        },
         (error) => { 
             setIsLoaded(true);
             setError(error);
         }
-      )
+      ) 
   }, [])
 
   if (error) {
-    return <div><span className="error">Error: {error.message}</span></div>;
+    return <><span className="error">Error: {error.message}</span></>;
   } else if (!isLoaded) {
-    return <div>Loading...</div>;
+    return <>Loading...</>;
   } else {
-    return  <> 
-        {queries.map(x=> (query) => {
-            return (
-                <div key={query.Id} className="col-12 col-md-5 col-lg-5 col-xl-5 m-1">
-                    {query.ZipCode}
-                </div>
-            ); })
-        }
-    </>
+    return <RenderQueriesHistory queries={queries} />
+  }
 }
+
+const RenderQueriesHistory = (props) => {
+     const queriesHistory = props.queries.map((query) => {
+        return (
+            <div key={query.Id} className="queryDiv">
+                <RenderQueryItem query={query} onClick={props.onClick} ></RenderQueryItem>
+            </div>
+        );
+    })
+    
+    return (
+        <div className="queries">
+            {queriesHistory}
+        </div>
+    );
+}
+
+function RenderQueryItem({query, onClick}){
+    return (
+        <Card style={{ width: '18rem' }} className="QueryCard">
+            <CardBody className="QueryBody">
+                <CardTitle className="QueryTitle">{query.ZipCode}</CardTitle>
+                <CardSubtitle  className="QuerySubtitle">{query.Status}</CardSubtitle>
+                <CardText className="QueryText">City: {query.City ? query.City : ''}</CardText>
+                <CardText className="QueryText">Temperature: {query.Temperature ? query.Temperature : ''}</CardText>
+                <CardText className="QueryText">TimeZone: {query.TimeZone ? query.TimeZone : ''}</CardText>
+                <CardText className="QueryText">Error Message: {query.ErrorMessage ? query.ErrorMessage : ''}</CardText>
+            </CardBody>
+        </Card>
+
+    );
 }
 
 export default function QueriesHistory() {
