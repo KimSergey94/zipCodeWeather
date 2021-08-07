@@ -56,7 +56,7 @@ function RenderQueryItem({query, onClick}){
                 <CardTitle className="QueryTitle">ZipCode: {query.ZipCode}</CardTitle>
                 <CardSubtitle  className="QuerySubtitle">Id and status: {query.Id} ({query.Status})</CardSubtitle>
                 <CardText className="QueryText">City: {query.City ? query.City : ''}</CardText>
-                <CardText className="QueryText">Temperature: {query.Temperature ? query.Temperature == 0 ? query.Temperature : query.Temperature > 0 ? '+'+query.Temperature+'°' : '-'+query.Temperature+'°' : ''}</CardText>
+                <CardText className="QueryText">Temperature: {query.Temperature ? query.Temperature === 0 ? query.Temperature : query.Temperature > 0 ? '+'+query.Temperature+'°' : '-'+query.Temperature+'°' : ''}</CardText>
                 <CardText className="QueryText">TimeZone: {query.TimeZone ? query.TimeZone : ''}</CardText>
                 <CardText className="QueryText">{query.ErrorMessage ? 'Error Message: '+query.ErrorMessage : ''}</CardText>
             </CardBody>
