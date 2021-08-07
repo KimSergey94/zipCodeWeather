@@ -28,3 +28,14 @@
 .QueryText{
     font-size: smaller;
 }
+.QueryTest{
+    transform: rotate(
+        2deg
+        );
+            margin: 7px;
+            padding: 3px 9px;
+            float: right;
+            background: #ddd;
+            border: 1px solid #222;
+            box-shadow: 3px 3px 0 #222;
+}
