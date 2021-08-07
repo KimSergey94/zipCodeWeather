@@ -36,7 +36,7 @@ function Weather({ zipCode }){
               <span className="data">City: {weather.City}</span>
             </li>
             <li>
-              <span className="data">Temperature: {weather.Temperature > 0 ? '+' : '-'}{weather.Temperature}&#176;</span>
+              <span className="data">Temperature: {weather.Temperature > 0 ? '+' : weather.Temperature == 0 ? '' : '-'}{weather.Temperature}&#176;</span>
             </li>
             <li>
               <span className="data">Time zone: {weather.TimeZone}</span>

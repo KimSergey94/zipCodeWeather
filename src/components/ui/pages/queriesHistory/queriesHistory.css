@@ -1,0 +1,30 @@
+.queries{
+    display: flex;
+    flex-flow: wrap;
+}
+.queryDiv{
+    text-align: center;
+    margin: 8px;
+    background: #fff;
+    border: solid black;
+    border-color: black;
+    float: left;
+    border-width: 5px 3px 3px 5px;
+    border-radius: 95% 4% 97% 5%/4% 94% 3% 95%;
+    transform: rotate(2deg);
+    background-color: floralwhite;
+}
+.QueryCard{
+    color: #31708f;
+    margin:15px;
+    transform: rotate(-2deg);
+}
+.QueryTitle{
+    font-size: x-large;
+}
+.QuerySubtitle{
+    font-size: large;
+}
+.QueryText{
+    font-size: smaller;
+}
